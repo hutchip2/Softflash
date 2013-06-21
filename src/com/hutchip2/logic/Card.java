@@ -1,15 +1,15 @@
 package com.hutchip2.logic;
 
-import javax.swing.JLabel;
-
 public class Card {
 
-	private JLabel front;
-	private JLabel back;
+	public String front;
+	public String back;
+	
+	public boolean isFront;
 	
 	public Card(String frontText, String backText)	{
-		front.setText(frontText);
-		back.setText(backText);
+		front = frontText;
+		back = backText;
 	}
 
 }

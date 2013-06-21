@@ -16,21 +16,21 @@ public class Deck extends ArrayList<Card> {
 	 */
 	private static final long serialVersionUID = 1911992343128670634L;
 
-	String title = null;
+	public Card currentCard;
+	public int currentIndex;
 	
 	public Deck(File file)	{
-
-	}
-	
-	public void create(File file)	{
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(file));
-	        String line = br.readLine();
-	        while (line != null) {
-	            String frontText = line.substring(0, line.indexOf(','));
-	            String backText =  line.substring(line.indexOf(','), line.length()-1);
-	            add(new Card(frontText, backText));
+			String line;
+	        while ((line = br.readLine()) != null) {
+	        	if (line.isEmpty())	{
+	        		break;
+	        	}
+	            String front = line.substring(0, line.indexOf(','));
+	            String back =  line.substring(line.indexOf(',') + 1, line.length());
+	            add(new Card(front.trim(), back.trim()));
 	        }
 	    } catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -44,5 +44,6 @@ public class Deck extends ArrayList<Card> {
 			}
 	    }
 	}
+	
 	
 }

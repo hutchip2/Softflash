@@ -11,8 +11,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.hutchip2.logic.Deck;
 
 public class DeckPanel extends JPanel implements ActionListener {
 
@@ -23,25 +24,33 @@ public class DeckPanel extends JPanel implements ActionListener {
 	
 	JButton create;
 	
-	ArrayList<DeckGraphic> decks;
+	ArrayList<DeckGraphic> decks = new ArrayList<DeckGraphic>();
 	ButtonGroup deckGraphics = new ButtonGroup();
+	
+	public static int WIDTH = 1020;
 	
 	public DeckPanel()	{
 		//setBackground(Color.BLUE);
-		setPreferredSize(new Dimension(1024, 110));
+		setPreferredSize(new Dimension(WIDTH, 110));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		create = new JButton("Create New Deck...");
 		create.setPreferredSize(new Dimension(200,100));
 		create.addActionListener(this);
 		
+		
 		add(create);
-		
-		JScrollPane pane = new JScrollPane(this);
-		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		
 		setVisible(true);
+	}
+	
+	public void update() {
+
+		if (getComponentCount() > 4) {
+		    System.out.println(this.getComponentCount());
+			WIDTH += 200;
+		}
+		setPreferredSize(new Dimension(WIDTH, 110));
+		validate();
 	}
 	
 	public void toggle() {
@@ -53,20 +62,7 @@ public class DeckPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == create)	{
-		    JFileChooser fc = new JFileChooser();
-		    FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt");
-		    fc.setFileFilter(filter);
-		    int status = fc.showOpenDialog(this);
-		    if (status == JFileChooser.APPROVE_OPTION) {
-		    	DeckGraphic deck = new DeckGraphic(fc.getSelectedFile().getName());
-		    	//decks.add(deck);
-		    	deckGraphics.add(deck);
-		    	add(deck);
-		    	validate();
-		    }
-		    System.out.println(this.getComponentCount());
-		}
+		
 	}
 	
 }
