@@ -1,13 +1,13 @@
 package com.hutchip2.logic;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.hutchip2.gui.DeckGraphic;
 
 public class Deck extends ArrayList<Card> {
 
@@ -18,6 +18,7 @@ public class Deck extends ArrayList<Card> {
 
 	public Card currentCard;
 	public int currentIndex;
+	public DeckGraphic dg;
 	
 	public Deck(File file)	{
 		BufferedReader br = null;
@@ -43,6 +44,7 @@ public class Deck extends ArrayList<Card> {
 				e.printStackTrace();
 			}
 	    }
+		dg = new DeckGraphic(file.getName());
 	}
 	
 	

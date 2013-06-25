@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.hutchip2.logic.Deck;
 
@@ -24,7 +22,7 @@ public class DeckPanel extends JPanel implements ActionListener {
 	
 	JButton create;
 	
-	ArrayList<DeckGraphic> decks = new ArrayList<DeckGraphic>();
+	ArrayList<Deck> decks = new ArrayList<Deck>();
 	ButtonGroup deckGraphics = new ButtonGroup();
 	
 	public static int WIDTH = 1020;

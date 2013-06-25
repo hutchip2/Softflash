@@ -41,9 +41,7 @@ public class Window extends JFrame implements ActionListener, MouseListener, Cha
 	
 	JButton toggle;
 	JScrollPane sp;
-	
-	DeckGraphic deckGraphic;
-	
+		
 	public Window()	{
 		
 		setResizable(false);
@@ -72,7 +70,7 @@ public class Window extends JFrame implements ActionListener, MouseListener, Cha
 		//toggle.setBackground(Color.GREEN);
 		//toggle.addActionListener(this);
 		mb.showHideDecks.addActionListener(this);
-			
+				
 		add(cp, BorderLayout.CENTER);
 		add(sp, BorderLayout.SOUTH);
 		
@@ -134,22 +132,26 @@ public class Window extends JFrame implements ActionListener, MouseListener, Cha
 		    int status = fc.showOpenDialog(this);
 		    if (status == JFileChooser.APPROVE_OPTION) {
 		    	Deck deck = new Deck(fc.getSelectedFile());
-		    	deckGraphic = new DeckGraphic(fc.getSelectedFile().getName());
-		    	deckGraphic.addActionListener(this);
-		    	deckGraphic.setDeck(deck);
+		    	deck.dg.addActionListener(this);
+		  // System.out.println(deck.dg.getClass().toString());
 		    	//dp.decks.add(deckGraphic);
 		    	//dp.deckGraphics.add(deckG);
-		    	dp.add(deckGraphic);
+		    	dp.add(deck.dg);
+		    	dp.decks.add(deck);
 		    	dp.validate();
 		    }
 		}
-		if (e.getSource() == deckGraphic)	{
-			currentDeck = deckGraphic.deck;
-			currentDeck.currentIndex = 0;
-			currentDeck.currentCard = currentDeck.get(currentDeck.currentIndex);
-			currentDeck.currentCard.isFront = true;
-			cp.card.setText(currentDeck.currentCard.front);
-			cp.card.validate();
+		if (e.getSource().getClass().toString().equals("class com.hutchip2.gui.DeckGraphic"))	{
+			for (int i = 0; i < dp.decks.size(); i++)	{
+					if (e.getSource() == dp.decks.get(i).dg)	{
+						currentDeck = dp.decks.get(i);
+						currentDeck.currentIndex = 0;
+						currentDeck.currentCard = currentDeck.get(currentDeck.currentIndex);
+						currentDeck.currentCard.isFront = true;
+						cp.card.setText(currentDeck.currentCard.front);
+						cp.card.validate();
+					}
+			}
 		}
 		//if (e.getSource() == cp.card)	{
 			
